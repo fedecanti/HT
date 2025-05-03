@@ -8,7 +8,10 @@ with open('datos_habitos.json', 'r') as f:
 
 df = pd.DataFrame(data)
 habit = df.copy()
-
+habit.columns = habit.iloc[0]
+habit.columns=habit.columns.str.replace(r'\[', '', regex=True).str.replace(r'\]', '', regex=True)
+habit.columns = habit.columns.str.strip()
+habit = habit[1:]
 
 
 # Título de la app
@@ -16,7 +19,7 @@ st.title("Seguimiento de Hábitos 📊")
 
 # Mostrar tabla de datos
 st.subheader("Datos Registrados")
-st.dataframe(df)
+st.dataframe(habit)
 
 # Gráfico de cumplimiento de hábitos
 st.subheader("Cumplimiento de Hábitos")
