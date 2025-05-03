@@ -7,6 +7,9 @@ with open('datos_habitos.json', 'r') as f:
     data = json.load(f)
 
 df = pd.DataFrame(data)
+habit = df.copy()
+
+
 
 # Título de la app
 st.title("Seguimiento de Hábitos 📊")
