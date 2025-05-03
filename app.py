@@ -12,7 +12,7 @@ habit.columns = habit.iloc[0]
 habit.columns=habit.columns.str.replace(r'\[', '', regex=True).str.replace(r'\]', '', regex=True)
 habit.columns = habit.columns.str.strip()
 habit = habit[1:]
-
+habit.reset_index(drop=True, inplace=True)
 
 # Título de la app
 st.title("Seguimiento de Hábitos 📊")
@@ -22,9 +22,9 @@ st.subheader("Datos Registrados")
 st.dataframe(habit)
 
 # Gráfico de cumplimiento de hábitos
-st.subheader("Cumplimiento de Hábitos")
-habit_counts = df.iloc[:, 1:].apply(pd.value_counts).T
-st.bar_chart(habit_counts)
+#st.subheader("Cumplimiento de Hábitos")
+#habit_counts = df.iloc[:, 1:].apply(pd.value_counts).T
+#st.bar_chart(habit_counts)
 
 st.write("¡Sigue cumpliendo con tus hábitos!")  # Mensaje motivacional
 
