@@ -12,6 +12,9 @@ habit.columns = habit.iloc[0]
 habit.columns=habit.columns.str.replace(r'\[', '', regex=True).str.replace(r'\]', '', regex=True)
 habit.columns = habit.columns.str.strip()
 habit = habit[1:]
+habit = habit.drop(columns=['Marca temporal'])
+habit['Día']=pd.to_datetime(habit['Día'],format='%d/%m/%Y')
+habit.sort_values(by='Día', inplace=True, ascending= False)
 habit.reset_index(drop=True, inplace=True)
 
 # Título de la app
