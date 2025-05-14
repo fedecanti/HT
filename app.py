@@ -53,7 +53,14 @@ pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=False)
 pesaje.reset_index(drop=True, inplace=True)
 pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
+#Formateo valores
+columnas_valores = ['Peso kg', 'BMI', 'BFR %', 'Muscle Rate %']
+pesaje[columnas_valores] = pesaje[columnas_valores].apply(pd.to_numeric, errors='coerce')    #paso a número
+pesaje[columnas_valores] = pesaje[columnas_valores].fillna(method='ffill')       #Relleno con valor cercano
+
+
 pesaje = pesaje[['Fecha Pesaje','Peso kg','BMI','BFR %','Muscle Rate %']]
+
 
 # COMIENZO APP ####################################################################################################################################
 # Título de la app
