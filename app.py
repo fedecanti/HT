@@ -13,19 +13,20 @@ url = f"https://drive.google.com/uc?export=download&id={file_id}"
 response = requests.get(url)
 data = json.loads(response.text)
 
+#Paso el json a un dataframe
 df = pd.DataFrame(data)
-habit = df.copy()
-habit.columns = habit.iloc[0]
+habit = df.copy()                   #Uso una copia del df
+habit.columns = habit.iloc[0]         
 habit.columns=habit.columns.str.replace(r'\[', '', regex=True).str.replace(r'\]', '', regex=True)
 habit.columns = habit.columns.str.strip()
 habit = habit[1:]
 habit = habit.drop(columns=['Marca temporal'])
 
+#Formateo la columna Día
 habit['Día'] = pd.to_datetime(habit['Día'], errors='coerce')  # Convierte correctamente
 habit.sort_values(by='Día', inplace=True, ascending=False)
 habit.reset_index(drop=True, inplace=True)
-
-habit['Día'] = habit['Día'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
+#habit['Día'] = habit['Día'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
 # Título de la app
 st.title("Seguimiento de Hábitos de Fede CanTi 📊")
