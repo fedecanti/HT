@@ -3,6 +3,7 @@ import pandas as pd
 import json
 import requests
 
+# LEO HABITOS
 # ID del archivo en Google Drive
 file_id = "10I1cYGKxlXfHH3t_pb6gPKjrdhKQmOp5"  # ← reemplazalo por tu ID real
 
@@ -28,12 +29,32 @@ habit.sort_values(by='Día', inplace=True, ascending=False)
 habit.reset_index(drop=True, inplace=True)
 habit['Día'] = habit['Día'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
-# Título de la app
-st.title("Seguimiento de Hábitos de Fede CanTi 📊")
+# LEO PESAJE
+# ID del archivo en Google Drive
+file_id = "1B7OfVu4NE1tH7hga0vt-1QWtWkS5kTb6"  # ← reemplazalo por tu ID real
+# URL para descarga directa desde Drive
+url = f"https://drive.google.com/uc?export=download&id={file_id}"
 
-# Mostrar tabla de datos
-st.subheader("Datos Registrados")
+# Descargar y cargar JSON desde Google Drive
+response = requests.get(url)
+data = json.loads(response.text)
+
+#Paso el json a un dataframe
+df = pd.DataFrame(data)
+pesaje = df.copy()                   #Uso una copia del df
+
+# COMIENZO APP
+# Título de la app
+st.title("Seguimiento de Fede CanTi 📊")
+
+# Mostrar tabla de datos hábitos
+st.subheader("Datos Registrados Hábitos")
 st.dataframe(habit)
+
+#Mostrar tabla de pesaje
+st.subheader("Datos Registrados Peso")
+st.dataframe(pesaje)
+
 
 # Gráfico de cumplimiento de hábitos
 #st.subheader("Cumplimiento de Hábitos")
