@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import requests
-import plotly.express as px
+import matplotlib.pyplot as plt
 
 # LEO HABITOS ###############################################################################################################
 # ID del archivo en Google Drive
@@ -64,22 +64,16 @@ st.subheader("Datos Registrados Hábitos")
 st.dataframe(habit)
 
 #Gráfico de pesaje e índices
-fig = px.line(
-    pesaje,
-    x='Fecha Pesaje',
-    y=['Peso kg', 'BMI', 'BFR %', 'Muscle Rate %'],
-    markers=True,
-    title='Evolución corporal en el tiempo'
-)
+plt.figure(figsize=(10, 5))
+for col in ['Peso kg', 'BMI', 'BFR %', 'Muscle Rate %']:
+    plt.plot(pesaje['Fecha Pesaje'], pesaje[col], marker='o', label=col)
 
-fig.update_layout(
-    xaxis_title='Fecha',
-    yaxis_title='Valor',
-    legend_title='Indicadores',
-    hovermode='x unified'
-)
-
-st.plotly_chart(fig)
+plt.xlabel('Fecha')
+plt.ylabel('Valor')
+plt.title('Evolución corporal en el tiempo')
+plt.legend()
+plt.grid(True)
+st.pyplot(plt)
 
 
 #Mostrar tabla de pesaje
