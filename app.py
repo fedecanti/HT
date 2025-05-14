@@ -18,7 +18,7 @@ habit.sort_values(by='Día', inplace=True, ascending= False)
 habit.reset_index(drop=True, inplace=True)
 
 # Título de la app
-st.title("Seguimiento de Hábitos de Fede 📊")
+st.title("Seguimiento de Hábitos de Fede CanTi 📊")
 
 # Mostrar tabla de datos
 st.subheader("Datos Registrados")
