@@ -93,6 +93,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig)
+st.write(pesaje_tabla[['Fecha Pesaje']])
 
 #Mostrar tabla de pesaje
 st.subheader("Datos Registrados Peso")
