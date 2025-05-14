@@ -49,7 +49,7 @@ pesaje = pesaje.drop(columns=['Marca temporal'])
 
 #Formateo la columna Día
 pesaje['Fecha Pesaje'] = pd.to_datetime(pesaje['Fecha Pesaje'], errors='coerce')  # Convierte correctamente
-pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=False)
+pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=True)
 pesaje.reset_index(drop=True, inplace=True)
 pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
@@ -90,14 +90,10 @@ st.plotly_chart(fig)
 
 
 #Mostrar tabla de pesaje
+pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=True)
 st.subheader("Datos Registrados Peso")
 st.dataframe(pesaje)
 
-
-# Gráfico de cumplimiento de hábitos
-#st.subheader("Cumplimiento de Hábitos")
-#habit_counts = df.iloc[:, 1:].apply(pd.value_counts).T
-#st.bar_chart(habit_counts)
 
 st.write("¡Sigue cumpliendo con tus hábitos!")  # Mensaje motivacional
 
