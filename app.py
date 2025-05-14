@@ -27,9 +27,6 @@ habit.reset_index(drop=True, inplace=True)
 
 habit['Día'] = habit['Día'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
-habit.sort_values(by='Día', inplace=True, ascending= False)
-habit.reset_index(drop=True, inplace=True)
-
 # Título de la app
 st.title("Seguimiento de Hábitos de Fede CanTi 📊")
 
