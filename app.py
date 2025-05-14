@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import requests
+import plotly.express as px
 
 # LEO HABITOS ###############################################################################################################
 # ID del archivo en Google Drive
@@ -61,6 +62,25 @@ st.title("Seguimiento de Fede CanTi 📊")
 # Mostrar tabla de datos hábitos
 st.subheader("Datos Registrados Hábitos")
 st.dataframe(habit)
+
+#Gráfico de pesaje e índices
+fig = px.line(
+    pesaje,
+    x='Fecha Pesaje',
+    y=['Peso kg', 'BMI', 'BFR %', 'Muscle Rate %'],
+    markers=True,
+    title='Evolución corporal en el tiempo'
+)
+
+fig.update_layout(
+    xaxis_title='Fecha',
+    yaxis_title='Valor',
+    legend_title='Indicadores',
+    hovermode='x unified'
+)
+
+st.plotly_chart(fig)
+
 
 #Mostrar tabla de pesaje
 st.subheader("Datos Registrados Peso")
