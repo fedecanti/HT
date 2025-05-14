@@ -57,10 +57,11 @@ pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Forma
 columnas_valores = ['Peso kg', 'BMI', 'BFR %', 'Muscle Rate %']
 pesaje[columnas_valores] = pesaje[columnas_valores].apply(pd.to_numeric, errors='coerce')    #paso a número
 pesaje[columnas_valores] = pesaje[columnas_valores].fillna(method='ffill')       #Relleno con valor cercano
-
+pesaje[columnas_valores] = pesaje[columnas_valores].fillna(method='bfill')       #Relleno con valor cercano
 
 pesaje = pesaje[['Fecha Pesaje','Peso kg','BMI','BFR %','Muscle Rate %']]
 
+pesaje_tabla = pesaje.sort_values(by='Fecha Pesaje', ascending=False)
 
 # COMIENZO APP ####################################################################################################################################
 # Título de la app
@@ -88,11 +89,9 @@ fig.update_layout(
 
 st.plotly_chart(fig)
 
-
 #Mostrar tabla de pesaje
-pesaje.sort_values(by='Fecha Pesaje',inplace=True, ascending=False)
 st.subheader("Datos Registrados Peso")
-st.dataframe(pesaje)
+st.dataframe(pesaje_tabla)
 
 
 st.write("¡Sigue cumpliendo con tus hábitos!")  # Mensaje motivacional
