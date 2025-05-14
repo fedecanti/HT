@@ -52,6 +52,10 @@ pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=False)
 pesaje.reset_index(drop=True, inplace=True)
 pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
+#Formateo hora
+pesaje['Hora'] = pd.to_datetime(pesaje['Hora'], errors='coerce')  # Asegura que es datetime
+pesaje['Hora'] = pesaje['Hora'].dt.strftime('%H:%M')  # Formatea como 24 horas
+
 pesaje = pesaje[['Fecha Pesaje','Hora','Peso kg','BMI','BFR %','Muscle Rate %']]
 
 # COMIENZO APP ####################################################################################################################################
