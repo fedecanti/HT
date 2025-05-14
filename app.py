@@ -47,11 +47,12 @@ pesaje.columns = pesaje.iloc[0]
 pesaje = pesaje[1:]
 pesaje = pesaje.drop(columns=['Marca temporal'])
 
-#Formateo la columna Día
+#Formateo la columna Fecha
 pesaje['Fecha Pesaje'] = pd.to_datetime(pesaje['Fecha Pesaje'], errors='coerce')  # Convierte correctamente
+
+pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=True)
 pesaje.reset_index(drop=True, inplace=True)
-pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
 #Formateo valores
 columnas_valores = ['Peso kg', 'BMI', 'BFR %', 'Muscle Rate %']
