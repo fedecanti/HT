@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import requests
-import matplotlib.pyplot as plt
+import matplotlib as plt
 
 # LEO HABITOS ###############################################################################################################
 # ID del archivo en Google Drive
