@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import requests
 
-# LEO HABITOS
+# LEO HABITOS ###############################################################################################################
 # ID del archivo en Google Drive
 file_id = "10I1cYGKxlXfHH3t_pb6gPKjrdhKQmOp5"  # ← reemplazalo por tu ID real
 
@@ -29,7 +29,7 @@ habit.sort_values(by='Día', inplace=True, ascending=False)
 habit.reset_index(drop=True, inplace=True)
 habit['Día'] = habit['Día'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
-# LEO PESAJE
+# LEO PESAJE ################################################################################################################################
 # ID del archivo en Google Drive
 file_id = "1B7OfVu4NE1tH7hga0vt-1QWtWkS5kTb6"  # ← reemplazalo por tu ID real
 # URL para descarga directa desde Drive
@@ -42,8 +42,19 @@ data = json.loads(response.text)
 #Paso el json a un dataframe
 df = pd.DataFrame(data)
 pesaje = df.copy()                   #Uso una copia del df
+pesaje.columns = pesaje.iloc[0]
+pesaje = pesaje[1:]
+pesaje = pesaje.drop(columns=['Marca temporal'])
 
-# COMIENZO APP
+#Formateo la columna Día
+pesaje['Fecha Pesaje'] = pd.to_datetime(pesaje['Fecha Pesaje'], errors='coerce')  # Convierte correctamente
+pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=False)
+pesaje.reset_index(drop=True, inplace=True)
+pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
+
+
+
+# COMIENZO APP ####################################################################################################################################
 # Título de la app
 st.title("Seguimiento de Fede CanTi 📊")
 
