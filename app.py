@@ -20,7 +20,13 @@ habit.columns=habit.columns.str.replace(r'\[', '', regex=True).str.replace(r'\]'
 habit.columns = habit.columns.str.strip()
 habit = habit[1:]
 habit = habit.drop(columns=['Marca temporal'])
-habit['Día'].dt.strftime('%d-%m-%Y')
+
+habit['Día'] = pd.to_datetime(habit['Día'], errors='coerce')  # Convierte correctamente
+habit.sort_values(by='Día', inplace=True, ascending=False)
+habit.reset_index(drop=True, inplace=True)
+
+habit['Día'] = habit['Día'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
+
 habit.sort_values(by='Día', inplace=True, ascending= False)
 habit.reset_index(drop=True, inplace=True)
 
