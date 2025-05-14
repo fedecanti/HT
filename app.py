@@ -52,7 +52,7 @@ pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=False)
 pesaje.reset_index(drop=True, inplace=True)
 pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 
-
+pesaje = pesaje['Fecha Pesaje','Hora','Peso kg','BMI','BFR %','Muscle Rate %']
 
 # COMIENZO APP ####################################################################################################################################
 # Título de la app
