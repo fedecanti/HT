@@ -90,7 +90,7 @@ st.plotly_chart(fig)
 
 
 #Mostrar tabla de pesaje
-pesaje.sort_values(by='Fecha Pesaje', ascending=False)
+pesaje.sort_values(by='Fecha Pesaje',inplace=True, ascending=False)
 st.subheader("Datos Registrados Peso")
 st.dataframe(pesaje)
 
