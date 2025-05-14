@@ -49,7 +49,6 @@ pesaje = pesaje.drop(columns=['Marca temporal'])
 
 #Formateo la columna Fecha
 pesaje['Fecha Pesaje'] = pd.to_datetime(pesaje['Fecha Pesaje'], errors='coerce')  # Convierte correctamente
-
 pesaje['Fecha Pesaje'] = pesaje['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
 pesaje.sort_values(by='Fecha Pesaje', inplace=True, ascending=True)
 pesaje.reset_index(drop=True, inplace=True)
@@ -63,7 +62,11 @@ pesaje[columnas_valores] = pesaje[columnas_valores].fillna(method='bfill')      
 pesaje = pesaje[['Fecha Pesaje','Peso kg','BMI','BFR %','Muscle Rate %']]
 
 pesaje_tabla = pesaje.copy()
-pesaje_tabla = pesaje_tabla.sort_values(by='Fecha Pesaje', ascending=False).reset_index(drop=True)
+
+pesaje_tabla['Fecha Pesaje'] = pd.to_datetime(pesaje_tabla['Fecha Pesaje'], errors='coerce')  # Convierte correctamente
+pesaje_tabla['Fecha Pesaje'] = pesaje_tabla['Fecha Pesaje'].dt.strftime('%d-%m-%Y')  # Formatea la fecha
+pesaje_tabla.sort_values(by='Fecha Pesaje', inplace=True, ascending=False)
+pesaje_tabla.reset_index(drop=True, inplace=True)
 
 # COMIENZO APP ####################################################################################################################################
 # Título de la app
