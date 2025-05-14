@@ -1,10 +1,17 @@
 import streamlit as st
 import pandas as pd
 import json
+import requests
 
-# Cargar datos desde el JSON (asegúrate de que está en la misma carpeta)
-with open('datos_habitos.json', 'r') as f:
-    data = json.load(f)
+# ID del archivo en Google Drive
+file_id = "10I1cYGKxlXfHH3t_pb6gPKjrdhKQmOp5"  # ← reemplazalo por tu ID real
+
+# URL para descarga directa desde Drive
+url = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+# Descargar y cargar JSON desde Google Drive
+response = requests.get(url)
+data = json.loads(response.text)
 
 df = pd.DataFrame(data)
 habit = df.copy()
