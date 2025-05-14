@@ -61,7 +61,8 @@ pesaje[columnas_valores] = pesaje[columnas_valores].fillna(method='bfill')      
 
 pesaje = pesaje[['Fecha Pesaje','Peso kg','BMI','BFR %','Muscle Rate %']]
 
-pesaje_tabla = pesaje.sort_values(by='Fecha Pesaje', ascending=False)
+pesaje_tabla = pesaje.copy()
+pesaje_tabla = pesaje_tabla.sort_values(by='Fecha Pesaje', ascending=False).reset_index(drop=True)
 
 # COMIENZO APP ####################################################################################################################################
 # Título de la app
