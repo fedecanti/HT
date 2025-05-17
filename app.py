@@ -60,6 +60,8 @@ pesaje[columnas_valores] = pesaje[columnas_valores].fillna(method='ffill')      
 pesaje[columnas_valores] = pesaje[columnas_valores].fillna(method='bfill')       #Relleno con valor cercano
 
 pesaje = pesaje[['Fecha Pesaje','Peso kg','BMI','BFR %','Muscle Rate %']]
+pesaje_tabla = pesaje.copy()
+pesaje_tabla.sort_values(by='Fecha Pesaje', inplace=True, ascending=False)
 
 # COMIENZO APP ####################################################################################################################################
 # Título de la app
@@ -86,6 +88,11 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig)
+
+# Mostrar tabla de pesaje
+st.subheader("Datos Registrados Pesaje")
+st.dataframe(pesaje_tabla)
+
 
 st.write("¡Sigue cumpliendo con tus hábitos!")  # Mensaje motivacional
 
